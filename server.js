@@ -1,13 +1,10 @@
 import express, { json } from "express";
-import dotenv from "dotenv";
 import { apiInstance } from "./api.js";
 import {
     createDocumentFromPandadocTemplate,
     ensureDocumentCreated,
     documentSend,
 } from "./utils.js";
-
-dotenv.config({ path: ".env" });
 
 const app = express();
 const port = process.env.PORT || 5000;

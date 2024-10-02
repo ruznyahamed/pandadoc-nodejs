@@ -13,7 +13,8 @@ export async function createDocumentFromPandadocTemplate(
             email: "laura.pessina@soluvia.io",
             first_name: "Laura",
             last_name: "Pessina",
-            role: "Employee", // Role must match the one in your template
+            role: 'Employee', // Role must match the one in your template
+            signingOrder: 1,
         }, ],
         tokens: [{
                 name: "date",
