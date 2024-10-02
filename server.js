@@ -12,19 +12,25 @@ const port = process.env.PORT || 5000;
 // Middleware to parse JSON requests
 app.use(json());
 
+// Default endpoint
+app.get("/", (req, res) => res.status(200).send("Hello from Pandadoc API!"));
+
+// Health check endpoint
+app.get("/health", (req, res) => res.status(200).send("OK!"));
+
 // Endpoint to create a document from a template ID
-app.post("/create-document/:templateId", async(req, res) => {
-    const { templateId } = req.params;
-    const customFields = req.body.fields || {};
+app.post("/create-document", async(req, res) => {
+    const customFields = req.body || {};
 
     if (!templateId) {
-        return res.status(400).json({ error: "Template ID is required" });
+        return res
+            .status(400)
+            .json({ success: false, error: "Template ID is required" });
     }
 
     try {
         let createdDocument = await createDocumentFromPandadocTemplate(
             apiInstance,
-            templateId,
             customFields
         );
         console.log("Created document:", createdDocument);

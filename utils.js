@@ -1,19 +1,16 @@
 const MAX_CHECK_RETRIES = 5;
+const TEMPLATE_ID = "4XuGV2NXREbfZAN8i8PiS3";
 
-export async function createDocumentFromPandadocTemplate(
-    apiInstance,
-    templateId,
-    fields
-) {
+export async function createDocumentFromPandadocTemplate(apiInstance, body) {
     const documentCreateRequest = {
         name: "Test Document",
-        templateUuid: templateId.toString(), // Replace with your template UUID
+        templateUuid: TEMPLATE_ID, // Replace with your template UUID
         recipients: [{
             id: "Cn4TmScM3BXENieiRpZJAh",
             email: "laura.pessina@soluvia.io",
             first_name: "Laura",
             last_name: "Pessina",
-            role: 'Employee', // Role must match the one in your template
+            role: "Employee", // Role must match the one in your template
             signingOrder: 1,
         }, ],
         tokens: [{
@@ -57,8 +54,11 @@ export async function createDocumentFromPandadocTemplate(
                 value: "test",
             },
         ],
-        fields,
+        fields: {},
         metadata: {},
+        pricing: {},
+        tags: [],
+        content_placeholders: [],
         parseFormFields: true,
     };
 
@@ -92,8 +92,8 @@ export async function documentSend(apiInstance, document) {
         id: String(document.id),
         documentSendRequest: {
             silent: false,
-            subject: "Sent via Node SDK",
-            message: "This document was sent via Node SDK example",
+            subject: "Field Service Report",
+            message: "This is a testing report",
         },
     });
 }
