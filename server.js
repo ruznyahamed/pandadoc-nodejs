@@ -22,12 +22,6 @@ app.get("/health", (req, res) => res.status(200).send("OK!"));
 app.post("/create-document", async(req, res) => {
     const customFields = req.body || {};
 
-    if (!templateId) {
-        return res
-            .status(400)
-            .json({ success: false, error: "Template ID is required" });
-    }
-
     try {
         let createdDocument = await createDocumentFromPandadocTemplate(
             apiInstance,
